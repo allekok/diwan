@@ -17,8 +17,8 @@ function make_list ($path = ".") {
 
             // get desc
             $desc = "";
-            if(file_exists("desc/$e.txt")) {
-                $desc = file_get_contents("desc/$e.txt");
+            if(file_exists("$path/desc/$e.txt")) {
+                $desc = file_get_contents("$path/desc/$e.txt");
             }
 
             $files[] = [
