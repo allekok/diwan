@@ -24,7 +24,7 @@ function make_list ($path = ".") {
             $files[] = [
             "path" => $e,
             "size" => number_format(filesize("$path/$e")/1000000, 1) . "MB",
-            "desc" => $desc,
+            "desc" => substr($desc,0,strlen($desc)-1),
             ];
         }
     }
