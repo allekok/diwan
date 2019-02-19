@@ -21,7 +21,7 @@ function make_list ($path = ".") {
 
     sort($files);
     
-    $list = "'(\n" . implode("\n", $files) . "\n)";
+    $list = "(list\n" . implode("\n", $files) . "\n)";
 
     $f = fopen("$path/list-filenames.txt", "w");
     fwrite($f, $list);
