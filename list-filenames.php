@@ -15,13 +15,13 @@ function make_list ($path = ".") {
                 make_list ("$path/$e");
             }
 
-            $files[] = $e;
+            $files[] = "\"{$e}\"";
         }
     }
 
     sort($files);
     
-    $list = implode("\n", $files);
+    $list = "'(\n" . implode("\n", $files) . "\n)";
 
     $f = fopen("$path/list-filenames.txt", "w");
     fwrite($f, $list);
