@@ -45,3 +45,7 @@ function make_list ($path = ".") {
 // run
 
 echo make_list() . "\n";
+
+exec("php list-filenames.php");
+
+?>

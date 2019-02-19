@@ -32,3 +32,5 @@ function make_list ($path = ".") {
 
 // run
 echo make_list() . "\n";
+
+?>
