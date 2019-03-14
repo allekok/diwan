@@ -2,19 +2,13 @@
 
 function make_list ($path = ".") {
 
-    $not = [".", "..", "list.txt", "list.php", "list.php~", "image", "index.html", "index.html~", ".git", "LICENSE", "README.md", "google0a141cc724bea402.html", "sw.js", "sitemap.xml", "sitemap.xml~", "sitemap.php", "sitemap.php~", "desc", "list-filenames.php", "list-filenames.txt"];
+    $not = [".", "..", "list.txt", "list.php", ".git", "LICENSE", "README.md", ".gitignore", "desc", "list-filenames.php", "list-filenames.txt"];
     $dir = opendir($path);
     $files = [];
     
     while (false !== ($e = readdir($dir))) {
 
         if (! in_array($e, $not) ) {
-
-            if( is_dir("$path/$e") ) {
-
-                make_list ("$path/$e");
-            }
-
             // get desc
             $desc = "";
             if(file_exists("$path/desc/$e.txt")) {
