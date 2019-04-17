@@ -1,31 +1,26 @@
 <?php
-
-function make_list ($path = ".") {
-
-    $not = [".", "..", "list.txt", "list.php", ".git", "LICENSE", "README.md", ".gitignore", "desc", "list-filenames.php", "list-filenames.txt"];
-    $dir = opendir($path);
+/* Function */
+function make_list_filenames ($path = ".") {
+    $not = [".", "..", "list.txt", "list.php", ".git",
+	    "LICENSE", "README.md", ".gitignore", "desc",
+	    "list-filenames.php", "list-filenames.txt"];
     $files = [];
+    $dir = opendir($path);
     
     while (false !== ($e = readdir($dir))) {
-
-        if (! in_array($e, $not) ) {
-
+	
+        if(! in_array($e, $not) ) {
+	    
             $files[] = $e;
-        }
+	}
     }
 
     sort($files);
     
     $list = implode("\n", $files);
-
-    $f = fopen("$path/list-filenames.txt", "w");
-    fwrite($f, $list);
-    fclose($f);
-
-    return true;
+    file_put_contents("$path/list-filenames.txt", $list);
 }
 
-// run
-echo make_list() . "\n";
-
+/* Run */
+make_list_filenames();
 ?>
