@@ -23,6 +23,7 @@ function make_list ($path = ".")
 	    "desc" => $desc,
         ];
     }
+    closedir($dir);
     sort($files);
     for($i = 0; $i<count($files); $i++)
     {
