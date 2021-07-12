@@ -1,36 +1,36 @@
 <?php
 /* Function */
-function make_list ($path = ".")
-{
-    $not = [".", "..", "list.txt", "list.php", ".git",
-	    "LICENSE", "README.md", ".gitignore", "desc"];
-    $files = [];
-    $dir = opendir($path);
-    
-    while (false !== ($e = readdir($dir)))
-    {
-        if(in_array($e, $not))
-	    continue;	
-        // Get book description
-        $desc = "";
-        if(file_exists("$path/desc/$e.txt"))
-	{
-            $desc = trim(file_get_contents("$path/desc/$e.txt"));
+function make_list($path = ".") {
+	$not = [".", "..", "list.txt", "list.php", ".git",
+		"LICENSE", "README.md", ".gitignore", "desc"];
+	$files = [];
+
+	$dir = opendir($path);
+	while(false !== ($file = readdir($dir))) {
+		if(in_array($file, $not))
+			continue;	
+
+		$size = number_format(filesize("$path/$file") / 1e6, 1) . "MB";
+		
+		$desc = file_exists("$path/desc/$file.txt") ?
+			trim(file_get_contents("$path/desc/$file.txt")) :
+			"";
+
+		$files[] = [
+			"path" => $file,
+			"size" => $size,
+			"desc" => $desc,
+		];
 	}
-        $files[] = [
-	    "path" => $e,
-	    "size" => number_format(filesize("$path/$e")/1000000, 1) . "MB",
-	    "desc" => $desc,
-        ];
-    }
-    closedir($dir);
-    sort($files);
-    for($i = 0; $i<count($files); $i++)
-    {
-	$files[$i] = implode("\t\t", $files[$i]);
-    }    
-    $list = implode("\n\n", $files);
-    file_put_contents("$path/list.txt", $list);
+	closedir($dir);
+	
+	sort($files);
+	
+	for($i = 0; $i < count($files); $i++)
+		$files[$i] = implode("\t\t", $files[$i]);
+	
+	$list = implode("\n\n", $files);
+	file_put_contents("$path/list.txt", $list);
 }
 
 /* Run */
